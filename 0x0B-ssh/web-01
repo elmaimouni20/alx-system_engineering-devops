@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# server-01 login
+
+eval $("ssh-agent")
+
+ssh-add ~/alx-system_engineering-devops/0x0B-ssh/school
+
+ssh ubuntu@34.232.68.162
