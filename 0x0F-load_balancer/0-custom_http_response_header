@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
-# Script that configures Nginx server with a custom header
-apt-get -y update
-apt-get -y install nginx
-echo "Alx School" > /var/www/html/index.nginx-debian.html
-echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
-sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/adexino0606 permanent;\n\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}/" /etc/nginx/sites-available/default
-sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf
-service nginx start
+#Double the number of webservers
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+config="/etc/nginx/sites-available/default"
+sudo sh -c "echo 'Hello World!' > /var/www/html/index.nginx-debian.html"
+sudo sed -i '/^}$/i \ \n\tlocation \/redirect_me {return 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;}' $config
+sudo sed -i '/^}$/i \ \n\tlocation @404 {return 404 "Ceci n'\''est pas une page\\n";}' $config
+sudo sed -i 's/=404/@404/g' $config
+sudo sed -i "0,/location \/ {/s/location \/ {/&\n\t\tadd_header X-Served-By '$HOSTNAME';/" $config
+sudo service nginx restart
