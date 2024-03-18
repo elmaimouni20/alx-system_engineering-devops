@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# server-01 login
+# Connects to server 100.25.180.66 with key in ~/.ssh/school
 
-eval $("ssh-agent")
-
-ssh-add ~/alx-system_engineering-devops/0x0B-ssh/school
-
-ssh ubuntu@54.146.73.191
+ssh -i ~/.ssh/school ubuntu@100.25.180.66
