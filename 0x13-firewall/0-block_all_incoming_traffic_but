@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#Double the number of webservers
+
+sudo apt-get update
+sudo apt-get install ufw -y
+sudo ufw status verbose
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+echo "y" | sudo ufw enable
+sudo ufw status verbose

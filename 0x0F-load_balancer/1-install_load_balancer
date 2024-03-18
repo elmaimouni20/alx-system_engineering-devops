@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#Double the number of webservers
+sudo apt update
+sudo apt install haproxy -y
+#sudo wget -q -O /etc/nginx/nginx.conf https://exampleconfig.com/static/raw/nginx/ubuntu20.04/etc/nginx/nginx.conf
+sudo sh -c 'echo "\nlisten myserver\n\tbind *:80\n\tbalance roundrobin\n\tserver server1 54.160.77.124:80 check\n\tserver server2 100.26.159.91:80 check\n" >> /etc/haproxy/haproxy.cfg'
+sudo service haproxy restart
