@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script runs `whoami` command while the  user is passed as an argument
+if [ $# -eq 1 ]; then
+	su "$1" -s /bin/bash -c "whoami"
+else
+	echo "Usage: ./0-iamsomeoneelse <user>"
+	exit 1
+fi
